@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'movie_model.dart';
 
+/// que guarda informações da página, quantidade de filmes,
+/// quantidade de páginas e a lista de MovieModel.
 class MovieResponseModel {
   int? page;
   final int? totalResults;

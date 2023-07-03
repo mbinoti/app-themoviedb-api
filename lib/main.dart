@@ -1,5 +1,7 @@
-import 'package:appmovies/src/features/movies/presentation/widgets/movieview.dart';
+import 'package:appmovies/src/features/movies/presentation/widgets/movie_view.dart';
 import 'package:flutter/material.dart';
+
+import 'src/features/movies/presentation/widgets/movie_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +18,7 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('data'),
         ),
-        body: MovieView(),
+        body: MoviePage(),
       ),
     );
   }
