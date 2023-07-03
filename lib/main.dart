@@ -21,4 +21,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-// criar um widget depadding e text center de hello world.
