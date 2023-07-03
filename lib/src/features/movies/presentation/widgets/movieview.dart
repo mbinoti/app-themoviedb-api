@@ -1,4 +1,4 @@
-import 'package:appmovies/src/features/movies/domain/models/movie.dart';
+import 'package:appmovies/src/features/movies/domain/models/movie_model.dart';
 import 'package:appmovies/src/features/movies/presentation/controllers/movie_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +7,9 @@ class MovieView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Movie>>(
+    return FutureBuilder<List<MovieModel>>(
       future: movieController.fetchMovie(),
-      builder: (context, AsyncSnapshot<List<Movie>> snapshot) {
+      builder: (context, AsyncSnapshot<List<MovieModel>> snapshot) {
         // ConnectionState.done
         // Connected to a terminated asynchronous computation.
         // Conectado a uma computação assíncrona encerrada.

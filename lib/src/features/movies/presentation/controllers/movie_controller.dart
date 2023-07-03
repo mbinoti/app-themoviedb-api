@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:appmovies/src/constants/constants.dart';
-import 'package:appmovies/src/features/movies/domain/models/movie.dart';
+import 'package:appmovies/src/features/movies/domain/models/movie_model.dart';
 import 'package:http/http.dart' as http;
 
 class MovieController {
-  Future<List<Movie>> fetchMovie() async {
+  Future<List<MovieModel>> fetchMovie() async {
     var endpoint =
         Uri.parse('https://api.themoviedb.org/3/movie/popular?api_key=$apiKey');
 
@@ -21,7 +21,7 @@ class MovieController {
 
         // Mapeie cada filme em um objeto Movie e retorne a lista resultante.
         return results
-            .map((movie) => Movie.fromJson(movie as Map<String, dynamic>))
+            .map((movie) => MovieModel.fromJson(movie as Map<String, dynamic>))
             .toList();
       } else {
         // Se o servidor retorna uma resposta com um status code que não é 200, lança uma exceção.
