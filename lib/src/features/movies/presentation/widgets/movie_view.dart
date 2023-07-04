@@ -1,8 +1,8 @@
 import 'package:appmovies/src/features/movies/data/repositories/movie_repository.dart';
-// import 'package:appmovies/src/features/movies/domain/models/movie_model.dart';
+
 import 'package:appmovies/src/features/movies/domain/models/movie_response_model.dart';
 import 'package:appmovies/src/features/movies/presentation/controllers/movie_controller.dart';
-// import 'package:appmovies/src/features/movies/presentation/controllers/movie_controllerold.dart';
+
 import 'package:flutter/material.dart';
 
 class MovieView extends StatelessWidget {

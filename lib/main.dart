@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         // criar uma appbar
         appBar: AppBar(
-          title: const Text('data'),
+          title: const Text('Movies'),
         ),
         body: MoviePage(),
       ),

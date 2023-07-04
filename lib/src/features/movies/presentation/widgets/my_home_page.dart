@@ -1,13 +1,6 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// ignore_for_file: public_member_api_docs
-
 import 'dart:async';
 import 'dart:developer' as developer;
 
-import 'package:appmovies/src/extensions/connectivity_check.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,31 +35,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
-  // final Connectivity _connectivity = Connectivity();
-  // late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  final Connectivity _connectivity = Connectivity();
+  final ValueNotifier<ConnectivityResult> _connectionStatus =
+      ValueNotifier<ConnectivityResult>(ConnectivityResult.none);
 
   @override
   void initState() {
     super.initState();
-    initConnectivity();
+    _initConnectivity();
+    _connectivity.onConnectivityChanged.listen((result) {
+      _connectionStatus.value = result;
+    });
   }
 
-  Future<void> initConnectivity() async {
-    _connectionStatus = await context.checkConnectivity();
-    setState(() {});
+  Future<void> _initConnectivity() async {
+    try {
+      _connectionStatus.value = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      developer.log('Couldn\'t check connectivity status\n\nError: $e');
+    }
   }
 
   @override
   void dispose() {
-    // _connectivitySubscription.cancel();
+    _connectionStatus.dispose();
     super.dispose();
-  }
-
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    setState(() {
-      _connectionStatus = result;
-    });
   }
 
   @override
@@ -78,7 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 4,
       ),
       body: Center(
-          child: Text('Connection Status: ${_connectionStatus.toString()}')),
+        child: ValueListenableBuilder<ConnectivityResult>(
+          valueListenable: _connectionStatus,
+          builder:
+              (BuildContext context, ConnectivityResult value, Widget? child) {
+            return Text('Connection Status:\n ${value.toString()}');
+          },
+        ),
+      ),
     );
   }
 }
