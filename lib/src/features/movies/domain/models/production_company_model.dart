@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// mapeia as empresas que produziram o filme.
 class ProductionCompanyModel {
   final int? id;
   final String? logoPath;

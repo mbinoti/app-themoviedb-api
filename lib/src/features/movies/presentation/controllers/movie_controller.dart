@@ -5,6 +5,7 @@ import 'package:appmovies/src/features/movies/domain/models/movie_response_model
 
 class MovieController {
   final MovieRepository movieRepository;
+
   final StreamController<MovieResponseModel> _moviesStreamController =
       StreamController<MovieResponseModel>();
 

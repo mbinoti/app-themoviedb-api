@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:appmovies/src/constants/constants.dart';
-import 'package:appmovies/src/features/movies/domain/models/movie_model.dart';
 import 'package:http/http.dart' as http;
+
+//  conectar na API do TMDb utilizando http
+//  e converter a resposta em JSON para um objeto (model).
 
 class MovieRepository {
   Future<Map<String, dynamic>> fetchAllMovies() async {

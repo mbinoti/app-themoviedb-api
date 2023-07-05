@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// que mapeia os gêneros daquele filme.
 class MovieGenre {
   final int? id;
   final String? name;

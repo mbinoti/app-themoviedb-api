@@ -5,6 +5,7 @@ import 'production_company_model.dart';
 import 'production_country_model.dart';
 import 'spoken_language_model.dart';
 
+// guarda os detalhes de um filme.
 class MovieDetailModel {
   final bool? adult;
   final String? backdropPath;

@@ -1,9 +1,12 @@
 import 'package:appmovies/src/features/movies/domain/models/movie_detail_model.dart';
 import 'package:appmovies/src/features/movies/presentation/controllers/movie_detail_controller.dart';
+import 'package:appmovies/src/features/movies/presentation/widgets/chip_date.dart';
+import 'package:appmovies/src/features/movies/presentation/widgets/rate.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  const MovieDetailPage(this.movieId, {Key? key}) : super(key: key);
+  MovieDetailPage({required this.movieId});
   final int movieId;
 
   @override
@@ -11,14 +14,21 @@ class MovieDetailPage extends StatefulWidget {
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
+  // controller
   final movieDetailController = MovieDetailController();
+
+  // stream
+  // Stream<ConnectivityResult> connectivityStream =
+  //     Connectivity().onConnectivityChanged;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Movie Detail')),
-      body: FutureBuilder(
+      body: FutureBuilder<MovieDetailModel>(
         future: movieDetailController.fetchMovieById(widget.movieId),
-        builder: (context, snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<MovieDetailModel> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -29,27 +39,38 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return const Center(child: Text('No data'));
           }
 
-          // final movieDetail = snapshot.data as MovieDetailModel;
+          final movieDetail = snapshot.data;
           return SingleChildScrollView(
             child: Column(
               children: [
                 // cover.
                 Image.network(
-                  'https://image.tmdb.org/t/p/w500${movieDetail.backdropPath}',
+                  'https://image.tmdb.org/t/p/w500${movieDetail!.backdropPath}',
                   fit: BoxFit.cover,
                 ),
 
+                // status
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(children: []),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    movieDetail.overview,
-                    style: const TextStyle(
-                      fontSize: 16,
+                  padding: EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Rate(movieDetail.voteAverage as double),
+                        ChipDate(date: movieDetail.releaseDate as DateTime),
+                      ],
                     ),
+                  ),
+                ),
+
+                // overview
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                  child: Text(
+                    movieDetail.overview ?? '',
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],

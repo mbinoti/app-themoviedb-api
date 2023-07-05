@@ -1,4 +1,3 @@
-import 'package:appmovies/src/features/movies/presentation/widgets/movie_view.dart';
 import 'package:flutter/material.dart';
 
 import 'src/features/movies/presentation/widgets/movie_page.dart';
@@ -13,12 +12,22 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Movies',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.red,
+        buttonTheme: const ButtonThemeData(
+          textTheme: ButtonTextTheme.primary,
+        ),
+      ),
       home: Scaffold(
         // criar uma appbar
         appBar: AppBar(
           title: const Text('Movies'),
         ),
-        body: MoviePage(),
+        body: const MoviePage(),
       ),
     );
   }

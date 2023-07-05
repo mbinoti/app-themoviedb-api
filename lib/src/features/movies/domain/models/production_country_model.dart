@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// mapeia as cidades.
 class ProductionCountryModel {
   final String? iso31661;
   final String? name;

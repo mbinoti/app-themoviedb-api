@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// que mapeia as linguas faladas.
 class SpokenLanguageModel {
   final String? iso6391;
   final String? name;
