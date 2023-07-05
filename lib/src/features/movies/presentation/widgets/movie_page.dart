@@ -27,7 +27,13 @@ class _MoviePageState extends State<MoviePage> {
     return StreamBuilder<ConnectivityResult>(
       stream: connectivityStream,
       builder: (context, snapshot) {
-        if (!snapshot.hasData || snapshot.data == ConnectivityResult.none) {
+        //
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        //
+        if (snapshot.data == ConnectivityResult.none) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

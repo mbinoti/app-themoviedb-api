@@ -2,6 +2,7 @@ import 'package:appmovies/src/features/movies/domain/models/movie_detail_model.d
 import 'package:appmovies/src/features/movies/presentation/controllers/movie_detail_controller.dart';
 import 'package:appmovies/src/features/movies/presentation/widgets/chip_date.dart';
 import 'package:appmovies/src/features/movies/presentation/widgets/rate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +45,25 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             child: Column(
               children: [
                 // cover.
-                Image.network(
-                  'https://image.tmdb.org/t/p/w500${movieDetail!.backdropPath}',
-                  fit: BoxFit.cover,
+                SizedBox(
+                  height: 300,
+                  width: double.infinity,
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${movieDetail!.posterPath}',
+                    fit: BoxFit.cover,
+
+                    // progressIndicatorBuilder:
+                    //     (context, url, downloadProgress) =>
+                    //         CircularProgressIndicator(
+                    //             value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
 
                 // status
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
