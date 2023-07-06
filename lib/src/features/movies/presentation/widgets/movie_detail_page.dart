@@ -18,10 +18,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   // controller
   final movieDetailController = MovieDetailController();
 
-  // stream
-  // Stream<ConnectivityResult> connectivityStream =
-  //     Connectivity().onConnectivityChanged;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +48,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     imageUrl:
                         'https://image.tmdb.org/t/p/w500${movieDetail!.posterPath}',
                     fit: BoxFit.cover,
-
-                    // progressIndicatorBuilder:
-                    //     (context, url, downloadProgress) =>
-                    //         CircularProgressIndicator(
-                    //             value: downloadProgress.progress),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
