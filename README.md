@@ -16,9 +16,11 @@ API TMDB.
 
 ## packages utilizados
 
-  http
-  cached_network_image
-  intl
-  connectivity_plus
+  * http.
+  * cached_network_image.
+  * intl.
+  * connectivity_plus.
+  
+
 
   
